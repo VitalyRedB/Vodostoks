@@ -17,7 +17,7 @@ import asyncio
 from telegram import Bot
 from telegram.error import TelegramError
 
-# считываем и расшифровуем токен
+# считываем и расшифровуем токен sfdsfdsfd
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 
