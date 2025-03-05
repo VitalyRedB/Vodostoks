@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <!-- Контент страницы -->
+    <title>Товар в БД</title>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Список товара в фактурі</h1>
+
+    {% for el in articles %}
+    <div class="alert alert-info">
+        <h2>назва єлементу - {{ el.title }}</h2>
+        <p>колір - {{ el.color_t }}</p>
+        <p>прайс - {{ el.price }}</p>
+
+        <a href="/posts/{{ el.id }}" class="btn btn-warning">Детальнее</a>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

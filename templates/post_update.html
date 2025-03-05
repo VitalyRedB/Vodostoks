@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <!-- Контент страницы -->
+    <title>Редактирование товара</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Редактирование товару:</h1>
+    <form method="post">
+        <input type="text" class="form-control" name="title" id="title" value="{{article.title}}"><br>
+        <p>Введіть колір елементів</p>
+        <textarea type="number" class="form-control" name="color_t" id="color_t">{{article.color_t}}</textarea>
+        <p>Введіть кількість елементів</p>
+        <textarea type="number" class="form-control" name="quantity" id="quantity">{{article.quantity}}</textarea>
+        <p>Введіть кількість елементів</p>
+        <textarea type="number" class="form-control" name="price" id="price">{{article.price}}</textarea>
+
+        <button class="btn btn-success" type="submit">Оновити</button>
+    </form>
+</div>
+{% endblock %}

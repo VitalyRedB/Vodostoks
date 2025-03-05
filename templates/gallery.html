@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <!-- Контент страницы -->
+    <title>Галерея</title>
+{% endblock %}
+
+{% block body %}
+
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .gallery-container { width: 90%; margin: auto; }
+
+        .gallery-title { font-size: 24px; margin: 20px 0; }
+
+        /* Контейнер для карусели */
+        .carousel-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        /* Кнопки прокрутки */
+        .carousel-btn {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        .prev-btn { left: -40px; }
+        .next-btn { right: -40px; }
+
+        /* Горизонтальный скролл */
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 10px;
+            padding: 10px;
+            width: 80%;
+            white-space: nowrap;
+            scroll-snap-type: x mandatory;
+        }
+        .carousel::-webkit-scrollbar { display: none; }
+
+        /* Изображения */
+        .carousel img {
+            max-height: 200px; /* Сохраняем масштаб */
+            width: auto;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        /* Полноэкранный режим */
+        .fullscreen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.9);
+            display: none; /* Скрыто по умолчанию */
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .fullscreen img {
+            width: 70%;
+            height: auto;
+            cursor: pointer;
+        }
+        .image-protection {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(255,255,255,0); /* Полностью прозрачный слой */
+        }
+        /* Контейнер для фото */
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Маска (логотип или текст) */
+        .image-mask {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.5); /* Полупрозрачный текст */
+            font-size: 24px;
+            font-weight: bold;
+            pointer-events: none; /* Маска не мешает кликам */
+            user-select: none; /* Запрет выделения текста */
+        }
+
+    </style>
+
+
+    <h1>Галерея зображень</h1>
+
+    <div class="gallery-container">
+        {% for category, images in images.items() %}
+            {% set category_names = {'dah': 'Водостоки, Сайдинг, Крівля', 'detal': 'Фурнітура та єлементи крівлі', 'parkan': 'Сучасні та ексклюзівні паркани'} %}
+            <h2 class="gallery-title">{{ category_names.get(category, category|capitalize) }}</h2>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev-btn" onclick="scrollCarousel('{{ category }}', -1)">&#10094;</button>
+
+                <div class="carousel" id="carousel-{{ category }}">
+                    {% for image in images %}
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='imgs/gallery/' ~ category ~ '/' ~ image) }}"
+                                 alt="Зображення {{ loop.index }}"
+                                 onclick="toggleFullscreen(this)">
+                            <div class="image-mask">©Водосток~s KalinaMy</div> <!-- Маска для защиты -->
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button class="carousel-btn next-btn" onclick="scrollCarousel('{{ category }}', 1)">&#10095;</button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="fullscreen-view" class="fullscreen" onclick="toggleFullscreen()">
+        <div class="image-container">
+            <img id="fullscreen-img" src="" alt="Full Image">
+            <!-- Маска для полноэкранного режима -->
+            <div class="image-mask">©Водосток~s KalinaMy (050) 916 4005</div>
+        </div>
+    </div>
+
+    <script>
+        // Прокрутка галереи
+        function scrollCarousel(category, direction) {
+            let carousel = document.getElementById("carousel-" + category);
+            let scrollAmount = carousel.clientWidth / 3; // Прокручиваем на 3 изображения
+            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        // Полноэкранный режим
+        function toggleFullscreen(img) {
+            let fullscreenDiv = document.getElementById("fullscreen-view");
+            let fullscreenImg = document.getElementById("fullscreen-img");
+
+            if (img) {
+                fullscreenImg.src = img.src;
+                fullscreenDiv.style.display = "flex"; // Показываем полноэкранный режим
+            } else {
+                fullscreenDiv.style.display = "none"; // Скрываем полноэкранный режим
+            }
+        }
+
+        // Защита от правой кнопки мыши
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault(); // Отключаем контекстное меню
+        });
+
+        // Защита от перетаскивания
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', function(e) {
+                e.preventDefault(); // Отключаем перетаскивание
+            });
+        });
+    </script>
+
+{% endblock %}
+
+
+
+

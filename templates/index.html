@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <!-- Контент страницы номер 1 - главная -->
+    <title>Про мазазин</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Водостічні системи, виробництво та монтаж</h2><br>
+    <p>Вибір матеріалу водостічної системи може ґрунтуватися на ваших пріоритетах: довговічність, естетика та місткість. Пластикові жолоби оптимальні для економічного варіанту, металеві – для надійності, керамічні та композитні – для естетики та статусу.</p>
+
+    <div class="image-container">
+        <img class="mb-2 image" src="{{ url_for('static', filename='imgs/RL_vods.png') }}" alt="Foto">
+        <div class="image-mask">©Водосток~s KalinaMy (050) 916 4005</div>
+    </div>
+</div>
+
+<style>
+/* Контейнер для изображения */
+.image-container {
+    position: relative; /* Позволяет позиционировать маску */
+    display: inline-block; /* Подстраивается под размер изображения */
+    width: 100%;
+}
+
+/* Само изображение */
+.image {
+    width: 100%;
+    display: block;
+}
+
+/* Маска с текстом */
+.image-mask1 {
+    position: absolute;
+    bottom: 0; /* Размещаем внизу изображения */
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+/* Маска (логотип или текст) */
+        .image-mask {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.5); /* Полупрозрачный текст */
+            font-size: 24px;
+            font-weight: bold;
+            pointer-events: none; /* Маска не мешает кликам */
+            user-select: none; /* Запрет выделения текста */
+        }
+</style>
+<div class="container">
+    <h2>Сучасні паркани, виробництво та монтаж</h2><br>
+    <p>Паркани з бляхи мають низку переваг, які роблять їх популярним вибором для огорожі приватних та комерційних територій. Вони відзначаються високою міцністю та стійкістю до атмосферних впливів, що забезпечує довговічність конструкції. Крім того, такі паркани відносно прості у встановленні та не потребують складного догляду. Різноманітність дизайнів та кольорів дозволяє підібрати оптимальний варіант, який гармонійно впишеться в архітектурний стиль будівлі та ландшафт ділянки. Також, паркани з бляхи забезпечують надійний захист від сторонніх поглядів та несанкціонованого доступу, підвищуючи рівень безпеки власності.</p>
+    <div class="image-container">
+        <img class="mb-2" src="{{ url_for('static',filename='imgs/f3.jpg') }}" alt="Foto" width=100%>
+        <div class="image-mask">©Водосток~s KalinaMy (050) 916 4005</div>
+    </div>
+</div>
+<div class="container">
+    <h2>Виробництво та монтаж з 2004</h2><br>
+    <p>Один з проєктів 2010, у єксплотаціі більш 15 років!</p>
+    <!--<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/VUKt8CrGNR0?si=UYqYKkfR8CCf20mU&amp;clip=UgkxZBOIE0iWe862hejQhUtRW4LcvbR5a4Yg&amp;clipt=EAAYjNoC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-->
+     <div class="image-container">
+        <img width="154" height="205" src="static/imgs/gallery/dah/d(24).jpg" alt="Картинка 1">
+        <img width="154" height="205" src="static/imgs/gallery/dah/d(25).jpg" alt="Картинка 2">
+        <img width="154" height="205" src="static/imgs/gallery/dah/d(26).jpg" alt="Картинка 3">
+        <img width="154" height="205" src="static/imgs/gallery/dah/d(27).jpg" alt="Картинка 4">
+         <img width="154" height="205" src="static/imgs/gallery/dah/d(28).jpg" alt="Картинка 5">
+    </div>
+</div>
+{% endblock %}

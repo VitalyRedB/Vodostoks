@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Добавление товара</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Додавання товару</h1>
+
+    <form method="post">
+
+        <select class="form-control" name="title" id="title" onchange="validateForm()">
+            <option value="" disabled selected>Виберіть назву елементу:</option>
+            {% for item in products %}
+                <option value="{{ item.title }}" data-price="{{ item.price }}">{{ item.title }}</option>
+            {% endfor %}
+        </select><br>
+
+        <select class="form-control" name="color_t" id="color_t" onchange="validateForm()">
+            <option value="" disabled selected>Виберіть колір:   (Є вся палітра, якщо потрібного колеру нема у списку - виберить "XXXX")  </option>
+            {% for color in colors_id %}
+                <option value="{{ color }}">{{ color }}</option>
+            {% endfor %}
+        </select><br>
+        <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Введіть кількість елементів" oninput="validateForm()"><br>
+
+        <label for="price">Вартість елементу:</label>
+        <input type="number" class="form-control" name="price" id="price" readonly><br>
+
+
+        <button class="btn btn-success" type="submit" id="submitBtn" disabled>Додати товар</button>
+
+        <p id="errorMessage" class="text-danger mt-2">{{ error_message }}</p>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let title = document.getElementById("title").value;
+        let color = document.getElementById("color_t").value;
+        let quantity = document.getElementById("quantity").value;
+        let priceInput = document.getElementById("price");
+        let errorMessage = document.getElementById("errorMessage");
+        let submitBtn = document.getElementById("submitBtn");
+
+        // Обновление цены в зависимости от цвета
+        let selectedOption = document.getElementById("title").selectedOptions[0];
+        let basePrice = selectedOption ? parseFloat(selectedOption.dataset.price) || 0 : 0;
+
+        if (color === "Zn") {
+            priceInput.value = (basePrice * 0.8).toFixed(2);
+        } else {
+            priceInput.value = basePrice.toFixed(2);
+        }
+
+        // Проверяем, все ли поля заполнены
+        if (title && color && quantity) {
+            submitBtn.disabled = false;
+            errorMessage.innerHTML = "✅ Все дані введені!";
+            errorMessage.classList.remove("text-danger");
+            errorMessage.classList.add("text-success");
+        } else {
+            submitBtn.disabled = true;
+            errorMessage.innerHTML = "❌ Виберіть всі дані!";
+            errorMessage.classList.remove("text-success");
+            errorMessage.classList.add("text-danger");
+        }
+    }
+
+    document.getElementById("title").addEventListener("change", validateForm);
+    document.getElementById("color_t").addEventListener("change", validateForm);
+    document.getElementById("quantity").addEventListener("input", validateForm);
+</script>
+
+{% endblock %}
+
+
+
+

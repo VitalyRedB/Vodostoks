@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <!-- Контент страницы -->
+    <title>Invoice</title>
+{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_invoice.css') }}">
+{% endblock %}
+
+{% block body %}
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .mt-5 {
+            margin-top: 3rem;
+        }
+
+        .mt-3 {
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+
+
+<div class="container mt-5">
+    <h3>Рахунок до сплати</h3>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Колір</th>
+                <th>Ціна/од</th>
+                <th>Кількість</th>
+                <th>Вартість</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.color_t }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ (item.price * item.quantity)|round(2) }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4" class="text-right"><strong>Загальна сума (євро):</strong></td>
+                <td><strong>{{ total_sum|round(2) }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+        <a class="btn {% if registered %}btn-success disabled{% else %}btn-danger{% endif %}"
+            href="{% if not registered %}/register{% else %}#{% endif %}">
+            {% if registered %}Успішно зареєстровано {{user_data}}{% else %}Вхід/Реєстрація{% endif %}
+        </a>
+        <a href="{{ url_for('new_register') }}" class="btn btn-outline-primary">Перереєстрація</a>
+        <!-- Кнопка активна только если зарегистрирован -->
+        <form action="/end_index" method="POST">
+            <button type="submit" class="btn {% if registered %}btn-outline-primary{% else %}btn-secondary disabled{% endif %}">
+            Сформувати PDF та відправити замовлення
+            </button>
+        </form>
+
+</div>
+{% endblock %}
+

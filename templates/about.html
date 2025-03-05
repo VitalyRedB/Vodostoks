@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <!-- Контент страницы -->
+    <title>Онлайн послуги</title>
+{% endblock %}
+
+{% block body %}
+    <!-- Контент страницы -->
+    <h1>Онлайн замовлення, калькулятор, послуги</h1>
+    <p>Власне виробництво - більш 20 років, професійні консультаціі, монтаж</p>
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Вартість послуг</h1>
+      <p class="fs-5 text-body-secondary">Ми, як експерти з водовідведення, водостоків, парканів iз бляхі та алкотурів, пропонуем у широкому форматі рішення від консультаціі до реалізаціі проекту з повнім супроводом та гарантіями на продукцію та віконані послуги з монтажу та подальшого обслуговання проекту.</p>
+    </div>
+
+
+  <main>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Free</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">уе</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Єкспертна консультація.</li>
+              <li>Прорахунок смети.</li>
+              <li>Підбір матеріалу.</li>
+              <li>Гарантія якості продукціі.</li>
+              <li>Help center access.</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Pro</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><small class="text-body-secondary fw-light">від </small>599<small class="text-body-secondary fw-light"> грн.</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Виізд на обьект, експерна консультація.</li>
+              <li>Розробка проєкта та смети.</li>
+              <li>Контроль доставки продукціі на об'ект.</li>
+              <li>Гарантія якості продукціі.</li>
+              <li>Help center access.</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-primary">тел.(050) 916 4005</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+          <div class="card-header py-3 text-bg-primary border-primary">
+            <h4 class="my-0 fw-normal">Enterprise</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><small class="text-body-secondary fw-light">від </small>1999<small class="text-body-secondary fw-light"> грн.</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Повний супровід.</li>
+              <li>Забеспечення и реалізація виконання проекту від смети до завершення.</li>
+              <li>Гарантія на работу та матеріли.</li>
+              <li>Help center access.</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-primary">тел.(096) 621 3536</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img class="mb-2" src="{{ url_for('static',filename='imgs/f2.jpg') }}" alt="Foto" width=100%>
+      <div class="container mt-4">
+    <h2>Наш склад на мапі ринку Калинівський</h2>
+        <img class="mb-2" src="{{ url_for('static',filename='imgs/mapa2.png') }}" alt="Foto" width=100%>
+        <img class="mb-2" src="{{ url_for('static',filename='imgs/mapa.png') }}" alt="Foto" width=100%>
+    <p>Ви можете знайти нас за наступною адресою:</p>
+
+    <div style="border: 2px solid #ccc; border-radius: 10px; overflow: hidden;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1931.4720996157168!2d25.966001799999987!3d48.3102629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4734090043ff0f4b%3A0x449262264603a123!2z0JLQuNC00L7RgdGC0L7QutC4LCDQv9Cw0YDQutCw0L3QuCAo0LLQuNGA0L7QsdC90LjRhtGC0LLQviwg0LzQvtC90YLQsNC2KQ!5e1!3m2!1sru!2sua!4v1739268135796!5m2!1sru!2sua"
+            width="920" height="454" style="border:2;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+        <h5 id="address">Адреса: ринок Калинівський, вулиця Калинівська 13а, Чернівці, Україна</h5>
+        <p>tel.(050) 916 4005   tel.(096) 621 3536</p>
+      </div>
+
+{% endblock %}
+
+
